@@ -1,16 +1,26 @@
 import React from "react";
 import classNames from "classnames";
+import 'components/InterviewerListItem.scss'
 
-export default function InterviewerListItem() {
+function InterviewerListItem(props) {
+  const { id, name, avatar, selected } = props;
+
+  const interviewClass = classNames("interviewers__item", {
+    "interviewers__item--selected": selected
+  });
+
 
   return (
-    <li className="interviewers__item">
+    <li onClick={() => props.setInterviewer(id)} className={interviewClass}>
       <img
+        key={id}
         className="interviewers__item-image"
-        src="https://i.imgur.com/LpaY82x.png"
-        alt="Sylvia Palmer"
+        src={avatar}
+        alt={name}
       />
-      Sylvia Palmer
+      {selected && name}
     </li>
   )
 }
+
+export default InterviewerListItem;
