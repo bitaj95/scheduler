@@ -157,6 +157,6 @@ storiesOf("Button", module)
           <Confirm 
             message="Delete the appointment?"
             onConfirm={action("onConfirm")} 
-            onCancer={action("onCancel")} 
+            onCancel={action("onCancel")} 
           />))
 
