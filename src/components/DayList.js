@@ -18,7 +18,8 @@ function DayList(props) {
       {mappedDayList}
     </ul>
   )
+
 }
 
 
-export default DayList;
+export default DayList
