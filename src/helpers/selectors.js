@@ -27,3 +27,19 @@ export function getInterview(state, interview) {
 
  return resultObj;
 }
+
+export function getInterviewersForDay(state, day) {
+  const filteredDays = state.days.filter( dayObj => dayObj.name === day ); 
+
+  //Return empty array if filteredDays array is empty
+  if (filteredDays.length === 0) {
+    return [];
+  }
+
+  const interviewersArray = filteredDays[0].interviewers;
+
+  const results = [];
+  interviewersArray.forEach( interviewer => results.push(state.interviewers[interviewer]));
+
+  return results;
+}
