@@ -18,9 +18,7 @@ export function getInterview(state, interview) {
   
  if (!interview) {
    return null
- } else {
-   console.log("test*:",interview, state.interviewers[interview.interviewer] )
- }
+ } 
 
  const resultObj = {
    student: interview.student, 
