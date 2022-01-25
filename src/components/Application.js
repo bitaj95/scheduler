@@ -82,10 +82,15 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    setState({
-      ...state,
-      appointments
-    });
+    
+    return axios
+    .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+    .then( (res) => {
+      setState({
+        ...state,
+        appointments
+      });
+     })
   }
 
   const appointmentsParsed = dailyAppointments.map( appointment => {
