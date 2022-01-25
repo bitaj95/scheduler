@@ -110,7 +110,6 @@ export default function Application(props) {
         }
       )
     })
-    .catch((err) => console.log(`Error: ${err.message}`));
   }
 
   const appointmentsParsed = dailyAppointments.map( appointment => {

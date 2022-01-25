@@ -6,6 +6,7 @@ import Empty from "./Empty";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 import useVisualMode from "hooks/useVisualMode";
 
 const EMPTY = "EMPTY";
@@ -15,6 +16,8 @@ const SAVING = "SAVING";
 const CONFIRM = "CONFIRM";
 const DELETING = "DELETING";
 const EDITING= "EDITING";
+const ERROR_SAVE= "ERROR_SAVE";
+const ERROR_DELETE= "ERROR_DELETE";
 
 function Appointment(props) {
 
@@ -27,10 +30,10 @@ function Appointment(props) {
       student: name,
       interviewer
     };
-
     transition(SAVING);
     props.bookInterview(props.id, interview)
     .then(() => transition(SHOW))
+    .catch( (err) => transition(ERROR_SAVE, true))
   }
 
   function onDelete() {
@@ -38,10 +41,11 @@ function Appointment(props) {
   }
 
   function onConfirmDelete(){
-    transition(DELETING);
-
+    transition(DELETING, true);
     props.cancelInterview(props.id)
     .then( () => transition(EMPTY))
+    .catch( (err) => transition(ERROR_DELETE, true))
+    
   }
 
   function onEdit() {
@@ -56,8 +60,8 @@ function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={onDelete}
-          onEdit={onEdit}
+          onDelete={ () => onDelete()}
+          onEdit={ () => onEdit()}
         />
       )}
       {mode === CREATE && <Form interviewers={props.interviewers} onCancel={ () => back(EMPTY)} onSave={save}/> }
@@ -71,6 +75,10 @@ function Appointment(props) {
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="DELETING" />}
       {mode === CONFIRM && <Confirm onConfirm={onConfirmDelete}  onCancel={ () => back(EMPTY)} message="Are you sure you would like to delete?"/>}
+      {mode === ERROR_SAVE && <Error message="Error Saving" onClose={() => back()}/> }
+      {mode === ERROR_DELETE && (
+        <Error message="Error deleting appointment" onClose={() => back()} />
+      )}
     </article>
   )
 }

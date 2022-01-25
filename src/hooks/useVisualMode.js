@@ -8,8 +8,7 @@ export default function useVisualMode(initial) {
 
     setMode(newMode);
     if (!replace) {
-      //setHistory([...history, newMode])
-      setHistory(prev => ([...prev, newMode])
+      setHistory( (prev) => [...history, newMode])
     }
   }
 
