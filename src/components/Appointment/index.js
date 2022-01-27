@@ -44,8 +44,7 @@ function Appointment(props) {
     transition(DELETING, true);
     props.cancelInterview(props.id)
     .then( () => transition(EMPTY))
-    .catch( (err) => transition(ERROR_DELETE, true))
-    
+    .catch( (err) => transition(ERROR_DELETE, true))  
   }
 
   function onEdit() {
@@ -68,7 +67,7 @@ function Appointment(props) {
       {mode === EDITING && (
       <Form 
         interviewers={props.interviewers} 
-        interviewer={props.interview.interviewer.id || ""}
+        interviewer={props.interview.interviewer.id}
         student={props.interview.student}
         onCancel={ () => back(EMPTY)} 
         onSave={save}/> )}

@@ -8,9 +8,15 @@ function Form(props) {
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
 
+  //Validate that interviewer selected and student name has been provided before saving appointment
   function validate() {
     if (student === "") {
       setError("Student name cannot be blank");
+      return;
+    }
+
+    if(interviewer === null) {
+      setError("Please select an interviewer")
       return;
     }
 
@@ -18,11 +24,13 @@ function Form(props) {
     props.onSave(student, interviewer);
   }
 
+  //Will be called in cancel function to reset states
   const reset = () => {
     setStudent("")
-    setInterviewer("")
+    setInterviewer(null)
   }
 
+  //Calls onCancel function brought throught props, then reset states of student and interviewer
   const cancel = () => {
     props.onCancel()
     reset()
