@@ -39,7 +39,6 @@ export default function useApplicationData() {
       spots: (state.appointments[id].interview ? targetedDay[0].spots : targetedDay[0].spots - 1)
     }
 
-
     // Created updated version of entire days object to display new # spots
     const days = [
       ...state.days.slice(0, dayIndex),
