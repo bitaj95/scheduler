@@ -68,7 +68,7 @@ function Appointment(props) {
       {mode === EDITING && (
       <Form 
         interviewers={props.interviewers} 
-        interviewer={props.interview.interviewer.id}
+        interviewer={props.interview.interviewer.id || ""}
         student={props.interview.student}
         onCancel={ () => back(EMPTY)} 
         onSave={save}/> )}
