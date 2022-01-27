@@ -23,6 +23,30 @@ export default function useApplicationData() {
   const setDay = day => setState({ ...state, day });
   
   function bookInterview(id, interview) {
+    
+    /* state.days contains array of Mon-Fri days objects,
+    state.day contains the name of the day of appointments selected.
+    --> targetedDay will hold the days object (from state.days) of the day user selected */
+    const targetedDay = state.days.filter( day => day.name === state.day );
+    
+    //Locate index in "days" array where the selected day is located
+    const dayIndex = state.days.findIndex(day => day.name === state.day)
+  
+    //Will contain updated days object. 
+    //Ternary in place to prevent spots decreasing by one when editing an appointment (checks to see if interview exists)
+    const dayWithUpdatedSpots = {
+      ...targetedDay[0],
+      spots: (state.appointments[id].interview ? targetedDay[0].spots : targetedDay[0].spots - 1)
+    }
+
+
+    // Created updated version of entire days object to display new # spots
+    const days = [
+      ...state.days.slice(0, dayIndex),
+      dayWithUpdatedSpots,
+      ...state.days.slice(dayIndex + 1)
+    ]
+    
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -31,24 +55,6 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-
-        /*   state.days contains array of all the 5 days objects (Mon - Fri), the key "name" holds day name
-    state.day contains the name of the day of appointments being viewed 
-    --> targetedDay contains the days object (from state.days) of the day user selected */
-    const targetedDay = state.days.filter( day => day.name === state.day );
-    //Locate index in "days" array where the selected day is located
-    const dayIndex = state.days.findIndex(day => day.name === state.day)
-  
-    const dayWithUpdatedSpots = {
-      ...targetedDay[0],
-      spots: targetedDay[0].spots - 1 
-    }
-    // Created updated version of entire days object to display new # spots
-    const days = [
-      ...state.days.slice(0, dayIndex),
-      dayWithUpdatedSpots,
-      ...state.days.slice(dayIndex + 1)
-    ]
 
     return axios
     .put(`http://localhost:8001/api/appointments/${id}`, { interview })
