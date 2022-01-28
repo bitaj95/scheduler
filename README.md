@@ -16,7 +16,7 @@ This app was tested using Jest, testing-library and Cypress.
 
 
 ### Hover to Edit or Delete a Booking
-![Screen Shot 2022-01-27 at 9 33 29 PM](https://user-images.githubusercontent.com/79466802/151477224-03af8ad0-4ea3-4169-80e2-5b7e397b31fc.png)
+<img width="1416" alt="Screen Shot 2022-01-27 at 9 38 15 PM" src="https://user-images.githubusercontent.com/79466802/151477618-3edbc6a3-9442-4813-9dad-3bb3e50b4f21.png">
 
 
 ### Delete Booking Confirmation
