@@ -42,7 +42,7 @@ function Appointment(props) {
     transition(CONFIRM);
   }
 
-  //// Call cancelInterview function in the Application component, when response received, display new mode
+  // Call cancelInterview function in the Application component, when response received, display new mode
   function onConfirmDelete(){
     transition(DELETING, true);
     props.cancelInterview(props.id)
