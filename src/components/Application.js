@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
 import "./Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 import useApplicationData from "hooks/useApplicationData";
 
@@ -18,7 +16,7 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay( state, state.day);
   const interviewersForDay = getInterviewersForDay(state, state.day);
   
-
+  // Create an array of <Appointment/> components for the day 
   const appointmentsParsed = dailyAppointments.map( appointment => {
     const interview = getInterview(state, appointment.interview);
     return (

@@ -25,6 +25,7 @@ function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  // Call bookInterview function in the Application component, when response received, display new mode
   const save = (name, interviewer) => {
     const interview = {
       student: name,
@@ -36,10 +37,12 @@ function Appointment(props) {
     .catch( (err) => transition(ERROR_SAVE, true))
   }
 
+  // Function gets called upon clicking delete icon --> transition to CONFIRM display mode
   function onDelete() {
     transition(CONFIRM);
   }
 
+  //// Call cancelInterview function in the Application component, when response received, display new mode
   function onConfirmDelete(){
     transition(DELETING, true);
     props.cancelInterview(props.id)
@@ -47,6 +50,7 @@ function Appointment(props) {
     .catch( (err) => transition(ERROR_DELETE, true))  
   }
 
+  //Called upon clicking the edit icon --> transition to EDITING display mode 
   function onEdit() {
     transition(EDITING);
   }
